@@ -1,0 +1,57 @@
+{
+  "Comment": "Capstone 4 Workflow: Pass → Wait → Lambda (SSM retrieval) → Succeed/Fail",
+  "StartAt": "InitializeWorkflow",
+  "States": {
+    "InitializeWorkflow": {
+      "Type": "Pass",
+      "Comment": "State 1: Initialize the workflow context",
+      "Result": {
+        "workflowStarted": true,
+        "message": "Proceeding to fetch SSM config via Lambda"
+      },
+      "ResultPath": "$.init",
+      "Next": "WaitBeforeTask"
+    },
+    "WaitBeforeTask": {
+      "Type": "Wait",
+      "Comment": "State 2: Brief wait simulating dependency readiness",
+      "Seconds": 3,
+      "Next": "InvokeLambdaTask"
+    },
+    "InvokeLambdaTask": {
+      "Type": "Task",
+      "Comment": "State 3: Invoke Lambda to retrieve SSM parameter",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "<YOUR_LAMBDA_ARN>",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed", "Lambda.ServiceException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 2,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "WorkflowFailed"
+        }
+      ],
+      "Next": "WorkflowSucceeded"
+    },
+    "WorkflowSucceeded": {
+      "Type": "Succeed",
+      "Comment": "Workflow completed successfully"
+    },
+    "WorkflowFailed": {
+      "Type": "Fail",
+      "Cause": "Lambda invocation failed after retries",
+      "Error": "LambdaInvocationError"
+    }
+  }
+}

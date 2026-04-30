@@ -1,0 +1,27 @@
+{
+  "name": "capstone4-iac-workflow",
+  "version": "1.0.0",
+  "description": "Capstone 4: Advanced IaC & Automated Workflows - CDK + Step Functions + Lambda + SSM",
+  "main": "bin/app.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "deploy:workflow": "cdk deploy WorkflowStack --require-approval never",
+    "deploy:pipeline": "cdk deploy PipelineStack --require-approval never",
+    "deploy:all": "cdk deploy --all --require-approval never",
+    "destroy": "cdk destroy --all"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.100.0",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@types/node": "18.x",
+    "typescript": "~5.2.2",
+    "ts-node": "^10.9.1",
+    "aws-cdk": "2.100.0"
+  }
+}
