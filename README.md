@@ -60,7 +60,7 @@ capstone4/
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/<your-username>/capstone4.git
+git clone this repo
 cd capstone4
 npm install
 ```
@@ -110,7 +110,7 @@ Any subsequent push to the `main` branch will automatically trigger the pipeline
 ---
 
 ### 3. PipelineStack Deployment
-> The PipelineStack (CodePipeline + CodeBuild) deployed successfully via `cdk deploy`, completing in 80.82 seconds.
+> The PipelineStack (CodePipeline + CodeBuild "This encountered errors due to account limitation") deployed successfully via `cdk deploy`, completing in 80.82 seconds.
 
 ![PipelineStack Deployment](screenshots/pipeline-stack-deployment.png)
 
@@ -130,7 +130,7 @@ Any subsequent push to the `main` branch will automatically trigger the pipeline
 
 ---
 
-### 6. ✅ CodePipeline — Successful Execution (Required)
+### 6. ✅ CodePipeline — minor issues but concept is there (Required)
 > All pipeline stages (Source → BuildAndDeploy) completed successfully after fix. This is the primary CI/CD evidence showing the fully automated infrastructure deployment triggered by a GitHub push.
 
 ![Pipeline Success](screenshots/pipeline-success.png)
