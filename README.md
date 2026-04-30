@@ -38,6 +38,7 @@ capstone4/
 ├── lambda/
 │   └── index.js                  # Lambda function code
 ├── statemachine-definition.json  # Step Functions ASL (reference)
+├── screenshots/                  # Evidence of successful deployment
 ├── cdk.json
 ├── package.json
 ├── tsconfig.json
@@ -71,40 +72,80 @@ aws secretsmanager create-secret \
   --secret-string "<YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>"
 ```
 
-### 3. Deploy WorkflowStack First
+### 3. Bootstrap CDK
 ```bash
 npm run build
+cdk bootstrap
+```
+
+### 4. Deploy WorkflowStack First
+```bash
 npx cdk deploy WorkflowStack --require-approval never
 ```
 
-### 4. Deploy PipelineStack
+### 5. Deploy PipelineStack
 ```bash
 npx cdk deploy PipelineStack --require-approval never
 ```
 
-### 5. Push to GitHub to Trigger Pipeline
+### 6. Push to GitHub to Trigger Pipeline
 Any subsequent push to the `main` branch will automatically trigger the pipeline.
 
 ---
 
-## Screenshots
+## Screenshots & Evidence of Deployment
 
-### Screenshot 1: Successful CodePipeline Execution
-> Shows Source and BuildAndDeploy stages both green (succeeded)
+### 1. CDK Bootstrap
+> CDK environment bootstrapped successfully in the AWS account and region before any stack deployment.
 
-![CodePipeline Execution](screenshots/pipeline-success.png)
+![CDK Bootstrap](screenshots/bootstrap-cdk.png)
 
 ---
 
-### Screenshot 2: Step Functions Visual Graph (Successful Execution)
-> Shows the state machine graph with all states highlighted green
+### 2. WorkflowStack Deployment
+> The WorkflowStack (SSM Parameter + Lambda + Step Functions) deployed successfully via `cdk deploy`.
+
+![WorkflowStack Deployment](screenshots/workflowstack-deployment.png)
+
+---
+
+### 3. PipelineStack Deployment
+> The PipelineStack (CodePipeline + CodeBuild) deployed successfully via `cdk deploy`, completing in 80.82 seconds.
+
+![PipelineStack Deployment](screenshots/pipeline-stack-deployment.png)
+
+---
+
+### 4. SSM Parameter Store
+> The `/app/config/greeting` parameter is defined and stored in AWS Systems Manager Parameter Store as infrastructure-defined configuration — no hardcoded values in Lambda.
+
+![SSM Parameter Store](screenshots/ssm-parameter-store.png)
+
+---
+
+### 5. CodePipeline — Pipeline Error (Initial Run)
+> First pipeline run showing a transient error encountered during the initial execution, demonstrating real-world troubleshooting and pipeline observability.
+
+![Pipeline Error](screenshots/pipeline-error.png)
+
+---
+
+### 6. ✅ CodePipeline — Successful Execution (Required)
+> All pipeline stages (Source → BuildAndDeploy) completed successfully after fix. This is the primary CI/CD evidence showing the fully automated infrastructure deployment triggered by a GitHub push.
+
+![Pipeline Success](screenshots/pipeline-success.png)
+
+---
+
+### 7. ✅ Step Functions — Execution Graph (Required)
+> Visual graph of the Step Functions state machine execution showing all 4 states — `InitializeWorkflow` (Pass) → `WaitBeforeTask` (Wait) → `InvokeLambdaTask` (Task) → `WorkflowSucceeded` — all completed successfully (green).
 
 ![Step Functions Graph](screenshots/stepfunctions-graph.png)
 
 ---
 
-### Screenshot 3: CloudWatch Logs — Lambda SSM Retrieval
-> Shows Lambda logs confirming the SSM parameter was retrieved successfully
+### 8. ✅ CloudWatch Logs — Lambda SSM Retrieval (Required)
+> CloudWatch logs from the Lambda function confirming it successfully retrieved the greeting value from SSM Parameter Store at runtime using the AWS SDK, with IAM permissions granted by CDK's `grantRead()`.
 
 ![CloudWatch Logs](screenshots/cloudwatch-logs.png)
 
@@ -116,7 +157,7 @@ Any subsequent push to the `main` branch will automatically trigger the pipeline
 2. **Lambda Function** — At runtime, fetches the SSM parameter using the AWS SDK and logs the value. IAM permissions are granted by CDK using least-privilege `grantRead()`.
 3. **Step Functions** — Orchestrates a 4-state workflow:
    - `Pass` — initializes workflow context
-   - `Wait` — 3-second delay simulating dependency wait
+   - `Wait` — 3-second delay simulating dependency readiness
    - `Task` — invokes Lambda (with 2 retries + catch/fail fallback)
    - `Succeed` or `Fail` — terminal states
 4. **CodePipeline + CodeBuild** — On every GitHub push, CodeBuild runs `cdk synth` and `cdk deploy`, keeping your infrastructure always in sync with your code.

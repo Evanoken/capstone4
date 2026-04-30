@@ -481,7 +481,7 @@
          "Version": "1"
         },
         "Configuration": {
-         "Owner": "<YOUR_GITHUB_USERNAME>",
+         "Owner": "Evanoken",
          "Repo": "capstone4",
          "Branch": "main",
          "OAuthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
