@@ -1,0 +1,281 @@
+{
+  "version": "34.0.0",
+  "artifacts": {
+    "WorkflowStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "WorkflowStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "WorkflowStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://132831332261/us-east-1",
+      "properties": {
+        "templateFile": "WorkflowStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::132831332261:role/cdk-hnb659fds-deploy-role-132831332261-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::132831332261:role/cdk-hnb659fds-cfn-exec-role-132831332261-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-132831332261-us-east-1/0b4fe8eba1d2a223e5f00506eb9d69d51a9e58723081764c2e0006af584cebcc.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "WorkflowStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::132831332261:role/cdk-hnb659fds-lookup-role-132831332261-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "WorkflowStack.assets"
+      ],
+      "metadata": {
+        "/WorkflowStack/AppGreeting/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppGreeting4455FE37"
+          }
+        ],
+        "/WorkflowStack/LambdaExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaExecutionRoleD5C26073"
+          }
+        ],
+        "/WorkflowStack/LambdaExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaExecutionRoleDefaultPolicy6D69732F"
+          }
+        ],
+        "/WorkflowStack/WorkflowTask/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WorkflowTask865FF66C"
+          }
+        ],
+        "/WorkflowStack/WorkflowTask/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WorkflowTaskLogRetentionB0EB4ECD"
+          }
+        ],
+        "/WorkflowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+          }
+        ],
+        "/WorkflowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+          }
+        ],
+        "/WorkflowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+          }
+        ],
+        "/WorkflowStack/StateMachineLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StateMachineLogs3CB16D3C"
+          }
+        ],
+        "/WorkflowStack/WorkflowStateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WorkflowStateMachineRoleE0545793"
+          }
+        ],
+        "/WorkflowStack/WorkflowStateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WorkflowStateMachineRoleDefaultPolicyDAB74B4D"
+          }
+        ],
+        "/WorkflowStack/WorkflowStateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WorkflowStateMachine67D94DDA"
+          }
+        ],
+        "/WorkflowStack/LambdaFunctionName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaFunctionName"
+          }
+        ],
+        "/WorkflowStack/SSMParameterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SSMParameterName"
+          }
+        ],
+        "/WorkflowStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/WorkflowStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/WorkflowStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "WorkflowStack"
+    },
+    "PipelineStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "PipelineStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "PipelineStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://132831332261/us-east-1",
+      "properties": {
+        "templateFile": "PipelineStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::132831332261:role/cdk-hnb659fds-deploy-role-132831332261-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::132831332261:role/cdk-hnb659fds-cfn-exec-role-132831332261-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-132831332261-us-east-1/94d1ba5f317ba08e13f9f10576984ee553660ddb94f18c9dd290e90b2a1a7e60.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "PipelineStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::132831332261:role/cdk-hnb659fds-lookup-role-132831332261-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "PipelineStack.assets"
+      ],
+      "metadata": {
+        "/PipelineStack/CdkBuildProject/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkBuildProjectRoleE0B6FEB0"
+          }
+        ],
+        "/PipelineStack/CdkBuildProject/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkBuildProjectRoleDefaultPolicy3C7ECB00"
+          }
+        ],
+        "/PipelineStack/CdkBuildProject/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkBuildProject9382C38D"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/ArtifactsBucketEncryptionKey/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineArtifactsBucketEncryptionKey93347FCF"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/ArtifactsBucketEncryptionKeyAlias/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineArtifactsBucketEncryptionKeyAlias4EE9DFF5"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/ArtifactsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineArtifactsBucket5F833360"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/ArtifactsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineArtifactsBucketPolicy9EEE009B"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineRole9D8648B3"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineRoleDefaultPolicyE080AF0B"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4Pipeline58C8DB69"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/Source/GitHub_Source/WebhookResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineSourceGitHubSourceWebhookResource5053B6E0"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/BuildAndDeploy/CDK_Build_Deploy/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineBuildAndDeployCDKBuildDeployCodePipelineActionRole4B426F4B"
+          }
+        ],
+        "/PipelineStack/Capstone4Pipeline/BuildAndDeploy/CDK_Build_Deploy/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Capstone4PipelineBuildAndDeployCDKBuildDeployCodePipelineActionRoleDefaultPolicyE6EA7725"
+          }
+        ],
+        "/PipelineStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/PipelineStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/PipelineStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "PipelineStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

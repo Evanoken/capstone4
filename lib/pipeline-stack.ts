@@ -73,7 +73,7 @@ export class PipelineStack extends cdk.Stack {
           actions: [
             new codepipeline_actions.GitHubSourceAction({
               actionName: 'GitHub_Source',
-              owner: process.env.GITHUB_OWNER || '<YOUR_GITHUB_USERNAME>',
+              owner: process.env.GITHUB_OWNER || 'Evanoken',
               repo: process.env.GITHUB_REPO || 'capstone4',
               branch: 'main',
               oauthToken: cdk.SecretValue.secretsManager('github-token'),
